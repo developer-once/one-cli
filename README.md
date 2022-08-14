@@ -17,7 +17,7 @@ mkdir myapp && cd myapp
 然后就可以安装 one-cli 工具，并直接根据需要执行 init/create 命令
 
 ```
-npm i @developer-ones/onecli -S
+npm i @developer-ones/onecli -G
 
 # 根目录下直接创建新项目
 one init
