@@ -5,7 +5,8 @@
   "main": "/lib/commands/init/index.js",
   "files": [
     "lib/",
-    "bin/"
+    "bin/",
+    "README.md"
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,7 +14,9 @@
     "build": "rimraf ./lib && rollup -c"
   },
   "keywords": [
-    "cli"
+    "cli",
+    "one",
+    "d-one"
   ],
   "author": "buyu",
   "license": "ISC",
@@ -45,6 +48,7 @@
     "commander": "^9.0.0",
     "download-git-repo": "^3.0.2",
     "fs-extra": "^10.0.0",
-    "inquirer": "^8.2.0"
+    "inquirer": "^8.2.0",
+    "user": "^0.0.0"
   }
 }
