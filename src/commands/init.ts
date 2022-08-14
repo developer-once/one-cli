@@ -20,13 +20,6 @@ const question = [
     message: 'Project name',
     default: 'onecli',
   },
-  // --- 新建仓库 ---
-  // {
-  //   type: 'confirm', // yes or no 二选一
-  //   name: 'needRemote',
-  //   message: '是否创建新的远程仓库:',
-  //   default: false
-  // },
   // --- 描述 ---
   {
     type: 'input',
