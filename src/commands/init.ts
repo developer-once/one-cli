@@ -8,13 +8,9 @@ const question = [
     type: 'list',
     name: 'template',
     choices: [
-      { value: 'react', name: 'react template (react 子应用模版)' },
-      { value: 'npm', name: 'npm package (npm 包模版)' },
-      { value: 'component', name: 'component template (单组件模版)' },
       { value: 'vite-react-ts', name: 'vite react-ts template (vite 模版)' },
-      { value: 'node-ts', name: 'node Egg-ts template (egg TS 项目模版)' },
     ],
-    default: ['react'],
+    default: ['vite-react-ts'],
     message: '选择将要初始化的模版',
   },
   // --- 名称 ---

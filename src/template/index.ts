@@ -3,7 +3,6 @@ import tplComponent from './tpl-component.tsx';
 import tplIndex from './tpl-index.ts';
 import tplCss from './tpl-index.less';
 import tplPage from './tpl-page.tsx';
-import tplStore from './tpl-store.ts';
 import tplI18n from './tpl-i18n.js';
 
 export const page = [
@@ -14,10 +13,6 @@ export const page = [
   {
     file: tplCss,
     name: 'index.less',
-  },
-  {
-    file: tplStore,
-    name: 'store.ts',
   },
   {
     file: tplIndex,
