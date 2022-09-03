@@ -1,19 +1,25 @@
 #! /usr/bin/env node
-const program = require('commander');
+import { Command } from 'commander';
+import init from '../commands/init';
+import create from '../commands/create';
+import cz from '../commands/cz';
 
-program.version(require('../package.json').version);
+
+const program = new Command();
+
+
+program.version(require('../../package.json').version);
 
 program
   .option('init, --init <type>', '当前目录初始化项目')
   .option('create, --create <type>', '当前目录创建模版')
 
 // ---------- init ----------
-program 
+program
   .command('init')
   .description('init project')
-  .action((source, destination) => {
-    // ---- 执行 lib 下的文件 ----
-    require("../lib/init", source)
+  .action((source: any, destination: any) => {
+    init(destination);
   })
 
 // ---------- create ----------
@@ -21,8 +27,7 @@ program
   .command('create')
   .description('create page')
   .action((source, destination) => {
-    // ---- 执行 lib 下的文件 ----
-    require("../lib/create", source)
+    create(destination);
   })
 
 // ---------- cz ----------
@@ -30,8 +35,9 @@ program
   .command('cz')
   .description('git commitizen')
   .action((source, destination) => {
+    cz(destination);
     // ---- 执行 lib 下的文件 ----
-    require("../lib/create", source)
+    // require("../lib/create", source)
   })
 
 

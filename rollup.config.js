@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import pkg from './package.json';
 
 export default {
-  input: ['src/commands/init.ts', 'src/commands/create.ts'],
+  input: ['src/bin/index.ts', 'src/commands/init.ts', 'src/commands/create.ts'],
   output: {
     dir: 'lib',
     format: 'cjs',
