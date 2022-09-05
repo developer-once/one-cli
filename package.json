@@ -29,6 +29,7 @@
     "@types/inquirer": "^8.2.0",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.4",
@@ -43,12 +44,19 @@
     "one": "lib/bin/index.js"
   },
   "dependencies": {
+    "@types/shelljs": "^0.8.11",
     "chalk": "^4.1.2",
     "commander": "^9.0.0",
     "commitizen": "^4.2.5",
     "download-git-repo": "^3.0.2",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.2.0",
+    "shelljs": "^0.8.5",
     "user": "^0.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

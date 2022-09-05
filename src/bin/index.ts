@@ -35,7 +35,7 @@ program
   .command('cz')
   .description('git commitizen')
   .action((source, destination) => {
-    cz(destination);
+    cz();
     // ---- 执行 lib 下的文件 ----
     // require("../lib/create", source)
   })
