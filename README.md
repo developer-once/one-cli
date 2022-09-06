@@ -5,7 +5,7 @@
 one-cli 的使用相当简单，全局安装 one-cli 工具 ，并直接根据需要执行 init/create 命令
 
 ```bash
-npm i @developer-ones/onecli -g
+npm i @developer-once/onecli -g
 
 mkdir myapp && cd myapp
 

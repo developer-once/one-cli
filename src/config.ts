@@ -1,6 +1,6 @@
 export default {
   "vite-react-ts": {
-    "url": "direct:git@github.com:developer-ones/vite-template.git",
+    "url": "direct:git@github.com:developer-once/vite-template.git",
     "branch": "master"
   },
   "template": {

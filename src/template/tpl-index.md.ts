@@ -18,7 +18,7 @@ Demo:
 
 ` + '```tsx' + `
 import React from 'react';
-import { ${pascalName} } from '@developer-ones/component';
+import { ${pascalName} } from '@developer-once/one-component';
   
 export default () => {
   return (

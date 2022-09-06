@@ -1,7 +1,7 @@
 {
-  "name": "@developer-ones/onecli",
-  "version": "1.0.0",
-  "description": "developer-ones onecli cli",
+  "name": "@developer-once/onecli",
+  "version": "1.0.1",
+  "description": "developer-once onecli cli",
   "main": "/lib/commands/init/index.js",
   "files": [
     "lib",
