@@ -4,9 +4,7 @@ import init from '../commands/init';
 import create from '../commands/create';
 import cz from '../commands/cz';
 
-
 const program = new Command();
-
 
 program.version(require('../../package.json').version);
 
@@ -21,7 +19,7 @@ program
   .description('init project')
   .action(() => {
     init();
-  })
+  });
 
 // ---------- create ----------
 program
@@ -29,7 +27,7 @@ program
   .description('create page')
   .action(() => {
     create();
-  })
+  });
 
 // ---------- cz ----------
 program
@@ -37,7 +35,6 @@ program
   .description('git commitizen')
   .action(() => {
     cz();
-  })
+  });
 
-
-program.parse(process.argv)
+program.parse(process.argv);

@@ -4,7 +4,6 @@ import fs from 'fs-extra';
 import { page, component, i18n } from '../template/index';
 import config from '../config';
 
-
 const create = () => {
   const question = [
     // --- 模版 ---
@@ -27,12 +26,10 @@ const create = () => {
       default: 'test',
     },
   ];
-  
+
   inquirer.prompt(question).then(async (answers) => {
-    let {
-      name,
-      template,
-    } = answers;
+    let { template } = answers;
+    const { name } = answers;
     name.replace(name[0], name[0].toUpperCase());
     /**
      * 获取模版
@@ -54,7 +51,7 @@ const create = () => {
      */
     const buildCpsFiles = (type: string) => {
       let fullPath = path.join(path.resolve(process.cwd(), (config as any).template[template]));
-      fullPath = type === 'i18n' ?  fullPath : `${fullPath}/${name}`;
+      fullPath = type === 'i18n' ? fullPath : `${fullPath}/${name}`;
       const fileList = getTemplate(type);
       // 检查文件夹是否存在
       fs.ensureDirSync(fullPath);
@@ -63,7 +60,7 @@ const create = () => {
         fs.outputFileSync(filePath, item.file(name));
       });
     };
-  
+
     buildCpsFiles(template);
     // --- page 的时候默认创建 i18n ---
     if (template === 'page') {

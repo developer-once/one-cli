@@ -1,4 +1,5 @@
 module.exports = {
+  extends: [require.resolve('@umijs/fabric/dist/eslint')],
   env: {
     browser: true,
     es2021: true,

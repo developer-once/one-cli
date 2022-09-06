@@ -39,7 +39,9 @@ const init = () => {
       name: 'version',
       message: 'version',
       default: '1.0.0',
-  }];
+    },
+  ];
+
   inquirer.prompt(question).then(async (answers) => {
     const {
       name,
@@ -50,7 +52,6 @@ const init = () => {
     } = answers;
     await downloadReport((config as any)[template].url, name, description, author, version);
   });
-  
-}
+};
 
 export default init;

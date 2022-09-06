@@ -5,7 +5,9 @@ import downloadGitRepo from 'download-git-repo';
 // eslint-disable-next-line max-len
 function downloadReport(url: string, name: string, description: string, author: string, version: string) {
   downloadGitRepo(url, name, { clone: true }, (err: any) => {
-    console.log(err ? 'Error' : 'Success', err);
+    if (err) {
+      console.error(err);
+    }
     // -- 读取package.json --
     fs.readFile(`./${name}/package.json`, 'utf8', (err1, data) => {
       if (err1) {
