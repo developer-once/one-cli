@@ -2,7 +2,7 @@ import inquirer from 'inquirer';
 import downloadReport from '../utils/index';
 import config from '../config';
 
-const init = (data: Array<string>) => {
+const init = () => {
   const question = [
     // --- 模版 ---
     {

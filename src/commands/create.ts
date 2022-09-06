@@ -5,7 +5,7 @@ import { page, component, i18n } from '../template/index';
 import config from '../config';
 
 
-const create = (data: Array<string>) => {
+const create = () => {
   const question = [
     // --- 模版 ---
     {

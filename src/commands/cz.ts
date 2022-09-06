@@ -1,6 +1,5 @@
 import shell from 'shelljs';
 import fs from 'fs';
-// const fs = require('fs');
 
 
 const cz = async () => {
