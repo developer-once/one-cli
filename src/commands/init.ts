@@ -9,9 +9,17 @@ const init = () => {
       type: 'list',
       name: 'template',
       choices: [
+        { value: 'react', name: 'react ts template' },
         { value: 'vite-react-ts', name: 'vite react-ts template (vite 模版)' },
+        { value: 'npm', name: 'npm template (适用于 npm 包)' },
+        { value: 'node-ts', name: 'egg-node-ts template (egg-ts 模版)' },
       ],
-      default: ['vite-react-ts'],
+      default: [
+        'react',
+        'vite-react-ts',
+        'npm',
+        'node-ts',
+      ],
       message: '选择将要初始化的模版',
     },
     // --- 名称 ---
