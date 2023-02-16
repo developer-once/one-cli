@@ -17,10 +17,10 @@ const program = new Command();
 program
   .command('init')
   // --no-git 指定 options 里的变量名字， 前缀--no 会取反
-  .option('-n, --no-git', '跳过 git 初始化')
+  // .option('-n, --no-git', '跳过 git 初始化')
   .description('init project')
-  .action((option) => {
-    console.log(option);
+  .action(() => {
+    // console.log(option);
     init();
   });
 
