@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
-    "resolveJsonModule": true,
+    // tsc编译会把package.json文件输出到lib目录，会导致发包的时候会递归package.json文件,导致files作用域不对
+    // "resolveJsonModule": true,
     "target": "es5", /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', 'ES2021', or 'ESNEXT'. */
     "module": "commonjs", /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */
     "outDir": "./lib", /* Redirect output structure to the directory. */

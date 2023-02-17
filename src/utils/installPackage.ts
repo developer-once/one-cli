@@ -3,13 +3,16 @@ import execa from 'execa';
 import fs from 'fs-extra';
 import { homedir } from 'os';
 import path from 'path';
-import pkg from '../../package.json';
+// import pkg from '../../package.json';
 import { log, PREFIX } from './log';
 /**
  *
  * @param cachePath 缓存目录
  * @param packageName 包名
  */
+
+const pkg = require('../../package.json');
+
 const defaultCachePath = path.resolve(
   getDefaultCacheDir(),
   Object.keys(pkg.bin)[0],
