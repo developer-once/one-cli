@@ -1,6 +1,6 @@
 {
   "name": "@developer-once/onecli",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "developer-once onecli cli",
   "main": "/lib/commands/init/index.js",
   "files": [
@@ -39,7 +39,7 @@
     "typescript": "^4.5.5"
   },
   "bin": {
-    "one": "lib/bin/index.js"
+    "one": "src/bin/index.js"
   },
   "dependencies": {
     "cz-conventional-changelog": "^3.3.0",
