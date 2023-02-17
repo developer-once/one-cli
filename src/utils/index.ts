@@ -1,3 +1,5 @@
-import downloadPackage from './downloadPackage';
+import copyTemplate from './copyTemplate';
+import { installPackage } from './installPackage';
+import { log, PREFIX } from './log';
 
-export default downloadPackage;
+export { installPackage, log, PREFIX, copyTemplate };

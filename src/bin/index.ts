@@ -6,11 +6,8 @@ import cz from '../commands/cz';
 import init from '../commands/init';
 
 const program = new Command();
-// 这里设置的是全局的 options
-// program
-//   .option('init, --init <type>', '当前目录初始化项目')
-//   .option('create, --create <type>', '当前目录创建模版')
-//   .option('cz, --cz', '当前目录下载并配置 package.json 文件 commitizen');
+
+program.option('-d, --debug', '是否开启调试模式', false);
 
 // ---------- init ----------
 
@@ -40,6 +37,7 @@ program
     cz();
   });
 
+// 这里设置的是全局配置
 program
   .name(Object.keys(pkg.bin)[0])
   .usage('<command> [options]')

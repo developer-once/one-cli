@@ -1,77 +1,127 @@
 import inquirer from 'inquirer';
 import ora from 'ora';
 import type { templateInfo } from '../type/index';
-import downloadPackage from '../utils/index';
+import { copyTemplate, installPackage, log, PREFIX } from '../utils/index';
 
-const Template: templateInfo[] = [
-  {
-    name: 'react ts template',
-    npmName: '@developer-once/react-template',
-    version: '1.0.0',
-  },
-];
-const init = () => {
-  // 选择项目模板
-  const question = [
-    // --- 模版 ---
+// choices: [
+//   { value: 'react', name: 'react ts template' },
+//   { value: 'vite-react-ts', name: 'vite react-ts template (vite 模版)' },
+//   { value: 'npm', name: 'npm template (适用于 npm 包)' },
+//   { value: 'node-ts', name: 'egg-node-ts template (egg-ts 模版)' },
+// ],
+/**
+ * 选择模板
+ */
+async function selectTemplate() {
+  const Template: templateInfo[] = [
     {
+      name: 'react ts template',
+      npmName: '@developer-once/react-template',
+      version: '1.0.0',
+      framework: 'react',
+      language: 'ts',
+    },
+    {
+      name: 'vite react-ts template (vite 模版)',
+      npmName: '@developer-once/vite-ts-template',
+      version: '1.0.0',
+      framework: 'react',
+      language: 'ts',
+    },
+    {
+      name: 'npm template (适用于 npm 包)',
+      npmName: '@developer-once/npm-template',
+      version: '1.0.0',
+      framework: null,
+      language: 'js',
+    },
+    {
+      name: 'egg-node-ts template (egg-ts 模版)',
+      npmName: '@developer-once/node-egg-template',
+      version: '1.0.0',
+      framework: 'egg',
+      language: 'ts',
+    },
+  ];
+  return inquirer
+    .prompt({
       type: 'list',
       name: 'npmName',
       choices: Template.map((item) => ({
-        ...item,
+        name: item.name,
         value: item.npmName,
       })),
-      // choices: [
-      //   { value: 'react', name: 'react ts template' },
-      //   { value: 'vite-react-ts', name: 'vite react-ts template (vite 模版)' },
-      //   { value: 'npm', name: 'npm template (适用于 npm 包)' },
-      //   { value: 'node-ts', name: 'egg-node-ts template (egg-ts 模版)' },
-      // ],
       message: '选择将要初始化的模版',
-    },
-    // --- 名称 ---
-    {
+    })
+    .then((answer) => answer.npmName);
+}
+
+async function inputName() {
+  return inquirer
+    .prompt({
       type: 'input',
       name: 'name',
       message: 'Project name',
-      // default: 'onecli',
-      validate(v: string) {
-        return !!v;
-      },
-    },
-    // --- 描述 ---
-    {
-      type: 'input',
-      name: 'description',
-      message: 'Project description',
-    },
-    // --- 作者 ---
-    {
+      default: 'onecli',
+      // 校验
+      // validate(v: string) {
+      //   return !!v;
+      // },
+    })
+    .then((answer) => answer.name);
+}
+
+async function inputAuthor() {
+  return inquirer
+    .prompt({
       type: 'input',
       name: 'author',
       message: 'Author',
-    },
-    // --- 版本号 ---
-    {
+    })
+    .then((answer) => answer.author);
+}
+
+async function inputVersion() {
+  return inquirer
+    .prompt({
       type: 'input',
       name: 'version',
       message: 'version',
       default: '1.0.0',
-    },
-  ];
+    })
+    .then((answer) => answer.version);
+}
 
-  inquirer.prompt(question).then(async (answers) => {
-    const { npmName, name } = answers;
-    const templateInfo = Template.filter((item) => item.npmName === npmName)[0];
-    const spinner = ora('Loading').start();
-    try {
-      await downloadPackage(templateInfo, name);
-    } catch (e) {
-      console.error(e);
-    } finally {
-      spinner.stop();
-    }
-  });
+async function inputDescription() {
+  return inquirer
+    .prompt({
+      type: 'input',
+      name: 'description',
+      message: '请输入描述',
+    })
+    .then((answer) => answer.description);
+}
+
+const init = async () => {
+  const template = await selectTemplate();
+  log.verbose('template', template);
+  const name = await inputName();
+  log.verbose('name', name);
+  const author = await inputAuthor();
+  log.verbose('author', author);
+  const version = await inputVersion();
+  log.verbose('version', version);
+  const description = await inputDescription();
+  log.verbose('description', description);
+  const spinner = ora('Loading...').start();
+  try {
+    await installPackage(template, version);
+    await copyTemplate(name, template, author, version, description);
+    spinner.succeed('模板下载成功');
+  } catch (e: any) {
+    log.verbose(PREFIX, e.message);
+    spinner.stop();
+  }
 };
 
 export default init;
