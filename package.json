@@ -1,6 +1,6 @@
 {
   "name": "@developer-once/onecli",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "developer-once onecli cli",
   "main": "/lib/commands/init/index.js",
   "files": [
@@ -54,6 +54,10 @@
     "npmlog": "^7.0.1",
     "ora": "^5.4.1",
     "shelljs": "^0.8.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/developer-once/one-cli"
   },
   "config": {
     "commitizen": {
