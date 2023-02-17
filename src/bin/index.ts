@@ -1,6 +1,5 @@
 #! /usr/bin/env node
 import { Command } from 'commander';
-import pkg from '../../package.json';
 import create from '../commands/create';
 import cz from '../commands/cz';
 import init from '../commands/init';
@@ -10,6 +9,7 @@ const program = new Command();
 program.option('-d, --debug', '是否开启调试模式', false);
 
 // ---------- init ----------
+const pkg = require('../../package.json');
 
 program
   .command('init')
