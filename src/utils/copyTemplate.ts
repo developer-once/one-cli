@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import type { developerOnceNpmName } from '../type/index';
 import { defaultCachePath } from './installPackage';
-import { log, PREFIX } from './log';
+import { log } from './log';
 
 async function copyTemplate(
   name: string,
@@ -23,20 +23,22 @@ async function copyTemplate(
   const fileList = fs.readdirSync(originFile);
   fileList.map(async (item) => {
     if (item === 'package.json') {
-      fs.readJson(`${originFile}/${item}`, 'utf-8')
-        .then(async (packageObj) => {
-          await fs.writeJson(
-            './package.json',
-            { ...packageObj, author, version, description },
-            {
-              replacer: null,
-              spaces: 2,
-            },
-          );
-        })
-        .catch((err) => {
-          log.error(PREFIX, err.message);
-        });
+      try {
+        const packageObj = await fs.readJson(`${originFile}/${item}`, 'utf-8');
+        log.verbose('JSON数据:', JSON.stringify(packageObj));
+        log.verbose('JSON读路径:', `${originFile}/${item}`);
+        await fs.writeJson(
+          `${installPath}/${item}`,
+          { ...packageObj, author, version, description },
+          {
+            replacer: null,
+            spaces: 2,
+          },
+        );
+        log.verbose('JSON写路径:', `${installPath}/${item}`);
+      } catch (e: any) {
+        log.error('改写 json 失败', e.message);
+      }
       // const packageJson = JSON.parse(fs.readJson(`, 'utf8'));
     } else {
       fs.copySync(`${originFile}/${item}`, `${installPath}/${item}`);

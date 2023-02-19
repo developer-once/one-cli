@@ -1,7 +1,7 @@
 import log from 'npmlog';
 import isDebug from './isDebug';
 
-const PREFIX = 'one:';
+const PREFIX = '';
 if (isDebug()) {
   // 级别为调试信息的打印出来
   log.level = 'verbose';
