@@ -3,7 +3,7 @@ import { Command } from 'commander';
 import create from '../commands/create';
 import cz from '../commands/cz';
 import init from '../commands/init';
-import { log } from '../utils/index';
+import { checkVersion, log } from '../utils/index';
 
 const program = new Command();
 
@@ -38,6 +38,17 @@ program
     cz();
   });
 
+// ---------- cz ----------
+program
+  .command('publish')
+  .description('npm publish')
+  .hook('preAction', async () => {
+    log.info('', '命令执行之前');
+    await checkVersion();
+  })
+  .action(() => {
+    log.info('', '命令执行之后');
+  });
 // 这里设置的是全局配置
 program
   .name(Object.keys(pkg.bin)[0])
