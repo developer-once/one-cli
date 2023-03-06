@@ -6,13 +6,13 @@ import ora from 'ora';
 import type { publishType } from '../type/index';
 import { getNewVersion, getVersion, log, PREFIX } from '../utils/index';
 
-async function checkUpdate(oldVersin: string, newVersion: string) {
+async function checkUpdate(oldVersion: string, newVersion: string) {
   return inquirer
     .prompt([
       {
         type: 'confirm',
         name: 'checked',
-        message: `是否确定将 ${green(oldVersin)} 升级为 ${green(newVersion)}`,
+        message: `是否确定将 ${green(oldVersion)} 升级为 ${green(newVersion)}`,
         default: true,
       },
     ])
