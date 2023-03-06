@@ -97,7 +97,7 @@ async function inputDescription() {
     .then((answer) => answer.description);
 }
 
-const createProject = async (git: Boolean) => {
+const createProject = async (git: boolean) => {
   const template = await selectTemplate();
   log.verbose('template', template);
   const name = await inputName();
