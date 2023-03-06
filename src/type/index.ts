@@ -6,3 +6,9 @@ export type templateInfo = {
   framework: string | null;
   language: string;
 };
+export enum publishType {
+  PATCH = 'patch',
+  MINOR = 'minor',
+  MAJOR = 'major',
+  // BETA = 'beta',
+}

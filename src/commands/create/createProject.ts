@@ -1,14 +1,8 @@
 import inquirer from 'inquirer';
 import ora from 'ora';
-import type { templateInfo } from '../type/index';
-import { copyTemplate, gitInitialize, installPackage, log, PREFIX } from '../utils/index';
+import type { templateInfo } from '../../type/index';
+import { copyTemplate, gitInitialize, installPackage, log, PREFIX } from '../../utils/index';
 
-// choices: [
-//   { value: 'react', name: 'react ts template' },
-//   { value: 'vite-react-ts', name: 'vite react-ts template (vite 模版)' },
-//   { value: 'npm', name: 'npm template (适用于 npm 包)' },
-//   { value: 'node-ts', name: 'egg-node-ts template (egg-ts 模版)' },
-// ],
 /**
  * 选择模板
  */
@@ -103,7 +97,7 @@ async function inputDescription() {
     .then((answer) => answer.description);
 }
 
-const init = async (git: boolean) => {
+const createProject = async (git: boolean) => {
   const template = await selectTemplate();
   log.verbose('template', template);
   const name = await inputName();
@@ -130,4 +124,4 @@ const init = async (git: boolean) => {
   }
 };
 
-export default init;
+export default createProject;

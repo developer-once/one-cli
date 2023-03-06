@@ -1,10 +1,11 @@
 import inquirer from 'inquirer';
 import path from 'path';
 import fs from 'fs-extra';
-import { page, component, i18n } from '../template/index';
-import config from '../config';
+import { page, component, i18n } from '../../template/index';
+import { log } from '../../utils/index'
+import config from '../../config';
 
-const create = () => {
+const createTpl = () => {
   const question = [
     // --- 模版 ---
     {
@@ -29,6 +30,7 @@ const create = () => {
 
   inquirer.prompt(question).then(async (answers) => {
     let { template } = answers;
+    log.verbose('template', template)
     const { name } = answers;
     name.replace(name[0], name[0].toUpperCase());
     /**
@@ -51,6 +53,7 @@ const create = () => {
      */
     const buildCpsFiles = (type: string) => {
       let fullPath = path.join(path.resolve(process.cwd(), (config as any).template[template]));
+      log.verbose('fullPath', fullPath)
       fullPath = type === 'i18n' ? fullPath : `${fullPath}/${name}`;
       const fileList = getTemplate(type);
       // 检查文件夹是否存在
@@ -70,4 +73,4 @@ const create = () => {
   });
 };
 
-export default create;
+export default createTpl;
