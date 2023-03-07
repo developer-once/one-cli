@@ -5,7 +5,7 @@ import cz from '../commands/cz';
 import publish from '../commands/publish';
 import { publishType } from '../type/index';
 // import init from '../commands/init';
-// import { checkVersion, log } from '../utils/index';
+import { checkVersion } from '../utils/index';
 
 const program = new Command();
 
@@ -53,4 +53,7 @@ program
   .name(Object.keys(pkg.bin)[0])
   .usage('<command> [options]')
   .version(pkg.version)
+  .hook('preAction',() => {
+    checkVersion(pkg.name, pkg.version)
+  })
   .parse(process.argv);
