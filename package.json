@@ -19,6 +19,7 @@
   "author": "buyu",
   "license": "ISC",
   "devDependencies": {
+    "@types/conventional-changelog": "^3.1.1",
     "@types/fs-extra": "^9.0.13",
     "@types/inquirer": "^8.2.0",
     "@types/node": "^18.13.0",
@@ -45,6 +46,7 @@
     "chalk": "^4.1.2",
     "commander": "^9.0.0",
     "commitizen": "^4.2.5",
+    "conventional-changelog": "^3.1.25",
     "cz-conventional-changelog": "^3.3.0",
     "download-git-repo": "^3.0.2",
     "execa": "^5.1.1",
@@ -53,7 +55,6 @@
     "npmlog": "^7.0.1",
     "ora": "^5.4.1",
     "semver": "^7.3.8",
-    "shelljs": "^0.8.5",
     "simple-git": "^3.16.1"
   },
   "repository": {

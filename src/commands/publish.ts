@@ -4,7 +4,7 @@ import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import ora from 'ora';
 import type { publishType } from '../type/index';
-import { getNewVersion, getVersion, log, PREFIX } from '../utils/index';
+import { generateChangelog, getNewVersion, getVersion, log, PREFIX } from '../utils/index';
 
 async function checkUpdate(oldVersion: string, newVersion: string) {
   return inquirer
@@ -45,14 +45,13 @@ async function publish(type: publishType) {
             spaces: 2,
           },
         );
-        // 生成 CHANGELOG
-        // TODO: 重构 one cz
-        // 推送至 git 仓库
-        // 打 tag 并推送至 git
         // 打包
         execBuild();
         // 发布至 npm
         execPublish();
+        // 提交 git 信息
+        // 生成changelog
+        generateChangelog('angular');
         spinner.succeed('发布成功');
       } catch (e: any) {
         spinner.fail('发布失败');
