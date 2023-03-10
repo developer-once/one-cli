@@ -5,7 +5,7 @@ import cz from '../commands/cz';
 import publish from '../commands/publish';
 import { publishType } from '../type/index';
 // import init from '../commands/init';
-import { checkVersion } from '../utils/index';
+import { checkLogin, checkVersion, log, PREFIX } from '../utils/index';
 
 const program = new Command();
 
@@ -41,10 +41,13 @@ program
   .option(publishType.PATCH, 'patch your new npm package')
   .option(publishType.MINOR, 'minor your new npm package')
   .option(publishType.MAJOR, 'major your new npm package')
-  // .hook('preAction', async () => {
-  //   log.info('', '命令执行之前');
-  //   await checkVersion();
-  // })
+  // 检测是否登陆
+  .hook('preAction', async () => {
+    await checkLogin().catch(() => {
+      log.info(PREFIX, '请先登陆 npm 账户');
+      process.exit();
+    });
+  })
   .action(async (type) => {
     await publish(type);
   });
@@ -53,7 +56,7 @@ program
   .name(Object.keys(pkg.bin)[0])
   .usage('<command> [options]')
   .version(pkg.version)
-  .hook('preAction',() => {
-    checkVersion(pkg.name, pkg.version)
+  .hook('preAction', () => {
+    checkVersion(pkg.name, pkg.version);
   })
   .parse(process.argv);
