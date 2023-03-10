@@ -1,4 +1,4 @@
-## 1.3.8 (2023-03-09)
+# 1.4.0 (2023-03-10)
 
 
 ### Bug Fixes
@@ -27,6 +27,8 @@
 * first push ([a63c785](https://github.com/developer-once/one-cli/commit/a63c785398e52144d5ac70a9849d7de5e7ecc0bc))
 * **init:** add init project type can choose ([3503931](https://github.com/developer-once/one-cli/commit/3503931873f65861de887d7754b03871920e2d31))
 * **one cz:** add one cz command in cli ([ee6fc94](https://github.com/developer-once/one-cli/commit/ee6fc94ef65c1d60c5b3545aa00f9ecd5bb89189))
+* one publish 全自动化 ([6bd254d](https://github.com/developer-once/one-cli/commit/6bd254d92a1ff37423b5122112dec1f3f5e182ff))
+* one publish 自动生成 changelog ([2ec1176](https://github.com/developer-once/one-cli/commit/2ec1176364f3fcffe5ab3aaead9d894777e7bc62))
 * remove init && create command with type ([568d249](https://github.com/developer-once/one-cli/commit/568d24925f6777719740974cfdb2df80c66456f0))
 
 
