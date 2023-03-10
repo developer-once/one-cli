@@ -1,3 +1,4 @@
+import checkLogin from './checkLogin';
 import checkVersion from './checkVersion';
 import copyTemplate from './copyTemplate';
 import generateChangelog from './generateChangelog';
@@ -8,6 +9,7 @@ import { installPackage } from './installPackage';
 import { log, PREFIX } from './log';
 
 export {
+  checkLogin,
   generateChangelog,
   installPackage,
   log,
