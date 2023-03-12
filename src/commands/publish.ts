@@ -82,7 +82,7 @@ async function publish(type: publishType) {
           log.verbose('git push','success');
           await git.tag( ['-a', `v${newVersion}`, '-m', `Release version v${newVersion}`])
           log.verbose('git tag','success');
-          git.pushTags('origin', {});
+          await git.pushTags('origin', {});
           log.verbose('git push tag','success');
           execBuild();
           // 发布至 npm
