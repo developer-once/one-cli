@@ -1,11 +1,11 @@
-# 1.4.0 (2023-03-10)
+## 1.4.1 (2023-03-12)
 
 
 ### Bug Fixes
 
-* 修复因为 package.json 导致的包上传文件丢失的问题 ([8d6b05a](https://github.com/developer-once/one-cli/commit/8d6b05af218842dfa51c082726ac05f03df5da15))
 * bin 指向错误的目录 ([fd71232](https://github.com/developer-once/one-cli/commit/fd7123209772568d8913addc085088bda91d7f85))
 * package.json files & keywords change ([2af5d78](https://github.com/developer-once/one-cli/commit/2af5d788863c4a449ebe8c71b91707257f5d5dce))
+* 修复因为 package.json 导致的包上传文件丢失的问题 ([8d6b05a](https://github.com/developer-once/one-cli/commit/8d6b05af218842dfa51c082726ac05f03df5da15))
 
 
 ### Build System
@@ -15,10 +15,6 @@
 
 ### Features
 
-* 检测脚手架版本 ([17ca54f](https://github.com/developer-once/one-cli/commit/17ca54fb7d76bd2c685628195f017b6e0451d1d3))
-* 新增 pushish 命令, 对比本地和远程版本 ([c2bd4c3](https://github.com/developer-once/one-cli/commit/c2bd4c3176387d2114f7f9aee2fcadacfb6c7cc1))
-* 支持 git 初始化 ([2b4756b](https://github.com/developer-once/one-cli/commit/2b4756bc4b591e9830252dead6d6cdaf7201dab4))
-* 自动化发包 ([12486d9](https://github.com/developer-once/one-cli/commit/12486d97e93f86bdab571518e7be1c09048ec4ad))
 * add cli get command with first type ([58d2e01](https://github.com/developer-once/one-cli/commit/58d2e016b8b63ba8c62b0a08d2044b7a8c6545ef))
 * add cz commands ([0ff620f](https://github.com/developer-once/one-cli/commit/0ff620f94379add23e09254c19ac3a3827703384))
 * add vite-ts template ([2fa443d](https://github.com/developer-once/one-cli/commit/2fa443d9a57985109bf19944109fec52b8b9c443))
@@ -30,6 +26,10 @@
 * one publish 全自动化 ([6bd254d](https://github.com/developer-once/one-cli/commit/6bd254d92a1ff37423b5122112dec1f3f5e182ff))
 * one publish 自动生成 changelog ([2ec1176](https://github.com/developer-once/one-cli/commit/2ec1176364f3fcffe5ab3aaead9d894777e7bc62))
 * remove init && create command with type ([568d249](https://github.com/developer-once/one-cli/commit/568d24925f6777719740974cfdb2df80c66456f0))
+* 支持 git 初始化 ([2b4756b](https://github.com/developer-once/one-cli/commit/2b4756bc4b591e9830252dead6d6cdaf7201dab4))
+* 新增 pushish 命令, 对比本地和远程版本 ([c2bd4c3](https://github.com/developer-once/one-cli/commit/c2bd4c3176387d2114f7f9aee2fcadacfb6c7cc1))
+* 检测脚手架版本 ([17ca54f](https://github.com/developer-once/one-cli/commit/17ca54fb7d76bd2c685628195f017b6e0451d1d3))
+* 自动化发包 ([12486d9](https://github.com/developer-once/one-cli/commit/12486d97e93f86bdab571518e7be1c09048ec4ad))
 
 
 ### BREAKING CHANGES
