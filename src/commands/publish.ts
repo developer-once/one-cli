@@ -61,77 +61,35 @@ async function publish(type: publishType) {
         const git = simpleGit(process.cwd());
         // 版本更新
         updateVersion(newVersion);
-        git.add('.').then(
-          (addSuccess) => {
-            log.verbose('git add . success', addSuccess);
-            // 提交 commit消息
-            git.commit(message, (err) => {
-              if (!err) {
-                log.verbose('git commit success', message);
-                // 生成changelog
-                generateChangelog('angular').then(() => {
-                  log.verbose(PREFIX, 'generateChangelog success');
-                  // 提交 changelog
-                  git.add('.').then(() => {
-                    log.verbose(PREFIX, 'git add changelog success');
-                    git.commit('docs: 更改CHANGELOG.md', (commiterr) => {
-                      if (!commiterr) {
-                        log.verbose(PREFIX, 'git commit changelog success');
-                        git.branchLocal((branchErr, branches) => {
-                          if (branchErr) {
-                            log.error(PREFIX, branchErr.message);
-                            process.exit();
-                          } else {
-                            git.push('origin', branches.current, {}, (e) => {
-                              log.verbose(PREFIX, 'git push success');
-                              if (e) {
-                                log.error(PREFIX, e.message);
-                              } else {
-                                // 推送tag
-                                // 打tag
-                                git.tag(
-                                  ['-a', `v${newVersion}`, '-m', `Release version v${newVersion}`],
-                                  (tagErr, tagResult) => {
-                                    if (tagErr) {
-                                      log.error('创建 tag 失败', tagErr.message);
-                                      process.exit();
-                                    } else {
-                                      log.verbose('创建 tag 成功', tagResult);
-                                      // git push
-                                      git.pushTags('origin', {}, (pushErr, pushResult) => {
-                                        if (pushErr) {
-                                          log.error('推送 tag 失败', pushErr.message);
-                                          process.exit();
-                                        } else {
-                                          log.info('推送 tag 成功', JSON.stringify(pushResult));
-                                          // 打包
-                                          execBuild();
-                                          // // 发布至 npm
-                                          execPublish();
-                                          spinner.succeed('发布成功');
-                                        }
-                                      });
-                                    }
-                                  },
-                                );
-                              }
-                            });
-                          }
-                        });
-                      }
-                    });
-                  });
-                });
-              } else {
-                log.error(PREFIX, err.message);
-              }
-            });
-          },
-          (addFailed) => {
-            log.error(PREFIX, addFailed);
-          },
-        );
-        log.verbose(PREFIX, '版本升级完成...');
+        await git.add('.')
+        log.verbose('git add','success');
+        await git.commit(message);
+        log.verbose('git commit','success');
+        await generateChangelog('angular');
+        log.verbose('generateChangelog','success');
+        await git.add('.')
+        log.verbose('generateChangelog','success');
+        await git.add('.')
+        log.verbose('git add changelog','success');
+        await git.commit('docs: 更改CHANGELOG.md')
+        log.verbose('git commit changelog','success');
+        git.branchLocal(async (branchErr, branches) => {
+        if (branchErr) {
+          log.error(PREFIX, branchErr.message);
+          process.exit();
+        } else {
+          await git.push('origin', branches.current)
+          log.verbose('git push','success');
+          await git.tag( ['-a', `v${newVersion}`, '-m', `Release version v${newVersion}`])
+          log.verbose('git tag','success');
+          git.pushTags('origin', {});
+          log.verbose('git push tag','success');
+          execBuild();
+          // 发布至 npm
+          execPublish();
+          spinner.succeed('发布成功');
+        }
+      })
       } catch (e: any) {
         spinner.fail('发布失败');
         log.error(PREFIX, e.message);

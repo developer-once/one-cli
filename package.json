@@ -1,6 +1,6 @@
 {
   "name": "@developer-once/onecli",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "developer-once onecli cli",
   "main": "/lib/bin/index.js",
   "files": [
