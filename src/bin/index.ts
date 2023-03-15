@@ -60,3 +60,11 @@ program
     checkVersion(pkg.name, pkg.version);
   })
   .parse(process.argv);
+
+process.on('uncaughtException', (e) => {
+  log.error('uncaughtException', e.message);
+});
+
+process.on('unhandledRejection', (reason) => {
+  log.error('Unhandled rejection:', reason as string);
+});
