@@ -3,7 +3,6 @@ import { Command } from 'commander';
 import create from '../commands/create/index';
 import cz from '../commands/cz';
 import publish from '../commands/publish';
-import { publishType } from '../type/index';
 // import init from '../commands/init';
 import { checkLogin, checkVersion, log, PREFIX } from '../utils/index';
 
@@ -36,11 +35,11 @@ program
 // ---------- publish ----------
 // TODO: 预发布版本
 program
-  .command('publish <option>')
+  .command('publish')
   .description('npm publish, 遵循 SemVer 规则')
-  .option(publishType.PATCH, 'patch your new npm package')
-  .option(publishType.MINOR, 'minor your new npm package')
-  .option(publishType.MAJOR, 'major your new npm package')
+  // .option(publishType.PATCH, 'patch your new npm package')
+  // .option(publishType.MINOR, 'minor your new npm package')
+  // .option(publishType.MAJOR, 'major your new npm package')
   // 检测是否登陆
   .hook('preAction', async () => {
     await checkLogin().catch(() => {
@@ -48,8 +47,8 @@ program
       process.exit();
     });
   })
-  .action(async (type) => {
-    await publish(type);
+  .action(async () => {
+    await publish();
   });
 // 这里设置的是全局配置
 program

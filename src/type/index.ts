@@ -10,5 +10,8 @@ export enum publishType {
   PATCH = 'patch',
   MINOR = 'minor',
   MAJOR = 'major',
-  // BETA = 'beta',
+  PREMAJOR = 'premajor',
+  PREMINOR = 'preminor',
+  PREPATCH = 'prepatch',
+  PRERELEASE = 'prerelease',
 }
