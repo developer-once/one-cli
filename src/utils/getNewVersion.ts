@@ -7,10 +7,10 @@ function getNewVersion(oldVersion: string, type: publishType) {
     major: inc(oldVersion, 'major'),
     minor: inc(oldVersion, 'minor'),
     patch: inc(oldVersion, 'patch'),
-    // premajor: inc(oldVersion, 'premajor'),
-    // preminor: inc(oldVersion, 'preminor'),
-    // prepatch: inc(oldVersion, 'prepatch'),
-    // prerelease: inc(oldVersion, 'prerelease'),
+    premajor: inc(oldVersion, 'premajor', 'beta'),
+    preminor: inc(oldVersion, 'preminor', 'beta'),
+    prepatch: inc(oldVersion, 'prepatch', 'beta'),
+    prerelease: inc(oldVersion, 'prerelease', 'beta'),
   };
   return newVersion[type];
 }

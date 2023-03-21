@@ -1,6 +1,6 @@
 {
   "name": "@developer-once/onecli",
-  "version": "1.4.2",
+  "version": "1.4.3-beta.0",
   "description": "developer-once onecli cli",
   "main": "/lib/bin/index.js",
   "files": [
@@ -17,7 +17,7 @@
     "d-one"
   ],
   "author": "buyu",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/conventional-changelog": "^3.1.1",
     "@types/fs-extra": "^9.0.13",
