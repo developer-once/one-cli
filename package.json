@@ -17,7 +17,7 @@
     "d-one"
   ],
   "author": "buyu",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/conventional-changelog": "^3.1.1",
     "@types/fs-extra": "^9.0.13",
