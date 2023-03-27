@@ -33,13 +33,9 @@ program
   });
 
 // ---------- publish ----------
-// TODO: 预发布版本
 program
   .command('publish')
   .description('npm publish, 遵循 SemVer 规则')
-  // .option(publishType.PATCH, 'patch your new npm package')
-  // .option(publishType.MINOR, 'minor your new npm package')
-  // .option(publishType.MAJOR, 'major your new npm package')
   // 检测是否登陆
   .hook('preAction', async () => {
     await checkLogin().catch(() => {
@@ -61,9 +57,13 @@ program
   .parse(process.argv);
 
 process.on('uncaughtException', (e) => {
+  // TODO: 错误上报
   log.error('uncaughtException', e.message);
+  process.exit();
 });
 
 process.on('unhandledRejection', (reason) => {
+  // TODO: 错误上报
   log.error('Unhandled rejection:', reason as string);
+  process.exit();
 });

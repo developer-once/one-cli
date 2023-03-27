@@ -1,14 +1,18 @@
-// eslint-disable-next-line
 import lint from '@commitlint/lint';
+// eslint-disable-next-line
+import load from '@commitlint/load';
 import execa from 'execa';
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import ora from 'ora';
+import path from 'path';
 import simpleGit from 'simple-git';
 import { publishType } from '../type/index';
 import { generateChangelog, getNewVersion, getVersion, log, PREFIX } from '../utils/index';
-// eslint-disable-next-line
-const { rules } = require('@commitlint/config-conventional');
+
+const CONFIG = {
+  extends: ['@commitlint/config-conventional'],
+};
 
 async function commitMessage() {
   return inquirer
@@ -16,9 +20,18 @@ async function commitMessage() {
       {
         type: 'input',
         name: 'message',
-        message: `是输入此次git commit 的消息(建议遵循 angular 规范)`,
+        message: `是输入此次git commit 的消息(遵循 angular 规范)`,
         validate: async (input) => {
-          const { valid, errors } = await lint(input, rules);
+          const cwd = path.resolve( __dirname, '..','..');
+          const opts = await load(CONFIG, { cwd: cwd });
+          log.verbose('在这个路径寻找lint文件', cwd);
+          const { valid, errors } = await lint(input, opts.rules, {
+            defaultIgnores: opts.defaultIgnores,
+            ignores: opts.ignores,
+            plugins: opts.plugins,
+            helpUrl: opts.helpUrl,
+            parserOpts: opts.parserPreset?.parserOpts!,
+          });
           if (errors.length) {
             log.verbose(PREFIX, JSON.stringify(errors));
             log.error(PREFIX, `参考格式: <type>(<scope>): <subject> 的commit `);
@@ -76,7 +89,8 @@ async function publish() {
       log.verbose('generateChangelog', 'success');
       await git.add('.');
       log.verbose('git add changelog', 'success');
-      await git.commit('docs: 更改CHANGELOG.md');
+      const changelogMessage = 'docs: 更改CHANGELOG.md'
+      await git.commit(changelogMessage);
       log.verbose('git commit changelog', 'success');
       git.branchLocal(async (branchErr, branches) => {
         if (branchErr) {
@@ -96,8 +110,12 @@ async function publish() {
         }
       });
     } catch (e: any) {
+      // TODO: 回滚
+      // 撤销 commit 到缓冲区
+      // 回写 version
       spinner.fail('发布失败');
       log.error(PREFIX, e.message);
+      process.exit();
     }
   }
 }
