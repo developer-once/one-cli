@@ -1,4 +1,3 @@
-// @ts-nocheck
 import inquirer from 'inquirer';
 import { TEMPLATE } from "../template";
 

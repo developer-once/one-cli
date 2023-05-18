@@ -1,32 +1,16 @@
-import shell from 'shelljs';
-import fs from 'fs';
+const path = require('path');
+const { bootstrap } = require('commitizen/dist/cli/git-cz');
 
-const cz = async () => {
-  // ---- 判断是否存在 gz ----
-  if (!shell.which('commitizen')) {
-    shell.exec('npm install -g commitizen');
-    shell.exec('npm install -g cz-conventional-changelog');
-  }
-
-  // ---- 2. 判断当前项目是否已经配置 cz ---
-  (fs as any).readFile('./package.json', 'utf8', (err: Error, data: any) => {
-    if (err) {
-      shell.echo(`${err}`);
-      shell.exit(1);
-    }
-
-    const userPackage = JSON.parse(data);
-
-    if (!userPackage?.config?.commitizen) {
-      if (shell.exec('commitizen init cz-conventional-changelog --save --save-exact').code !== 0) {
-        shell.echo('Error: cz init failed');
-        shell.exit(1);
-      }
-    }
-
-    // ---- 3. 当前项目文件夹 cz 初始化 ----
-    shell.echo('Success: cz init success! Please enter 「git add xxx」&&「git cz」at the command line to use!');
-  });
-};
-
+function cz() {
+  bootstrap(
+    {
+      cliPath: path.join(__dirname, '../../node_modules/commitizen'),
+      config: {
+        path: 'cz-conventional-changelog',
+      },
+    },
+    // importance 这里会把 one-cli 的参数透传给 git-cz 会导致无法识别的参数导致失败
+    process.argv.filter((item) => item !== 'cz'),
+  );
+}
 export default cz;

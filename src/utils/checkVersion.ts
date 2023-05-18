@@ -1,38 +1,28 @@
 // const REGISTRY = 'https://registry.npmjs.org/';
 import axios from 'axios';
 import execa from 'execa';
-import fs from 'fs-extra';
 import path from 'path';
 import semver from 'semver';
+import { green} from 'chalk'
 import { log, PREFIX } from './log';
 
-const TAGES: string = 'dist-tags';
-
-async function checkVersion() {
+async function checkVersion(name: string, version: string) {
   try {
     // 获取当前 npm 注册地址,通过 REGISTRY + 包名获取远程版本
-    const command: string = 'npm';
-    const args: string[] = ['config', 'get', 'registry'];
-    const cwd: string = path.resolve(`${process.cwd()}`);
-    log.verbose('当前根路径是:', cwd);
-
+    const command = 'npm';
+    const args = ['config', 'get', 'registry'];
+    const cwd = path.resolve(`${process.cwd()}`);
     const { stdout } = await execa(command, args, { cwd });
     const REGISTRY: string = stdout;
     log.verbose('npm解析的地址是:', REGISTRY);
-
-    if (!fs.pathExistsSync(`${cwd}/package.json`)) {
-      log.error(PREFIX, '当前根目录下没有 package.json 文件');
-      throw new Error('当前根目录下没有 package.json 文件');
-    }
-
-    const pkg: any = fs.readJsonSync(`${cwd}/package.json`);
-    const currentVersion: string = pkg.version;
-
-    log.verbose('当前本地版本是:', currentVersion);
-    
-    // 获取远程的版本
-    const { data } = await axios.get(REGISTRY + pkg.name);
-    if (!data[TAGES] || !data[TAGES].latest) {
+    const { data } = await axios.get(REGISTRY + name);
+    if (data['dist-tags'] && data['dist-tags'].latest) {
+      const originVersin = data['dist-tags'].latest;
+      log.verbose('当前远程的版本是:', originVersin);
+      if (semver.compare(originVersin, version) > 0) {
+        log.info('可以更新版本', `当前版本${green(version)} -> ${green(originVersin)}`, );
+      }
+    } else {
       log.info(PREFIX, '当前npm仓库不存在此包');
       return;
     }

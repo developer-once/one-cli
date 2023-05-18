@@ -1,21 +1,21 @@
 import ora from 'ora';
-import { TEMPLATE } from '../template/index';
+import { TEMPLATE } from '../../template/index';
 import {
   copyTemplate,
   gitInitialize,
   installPackage,
   PREFIX,
   log,
-} from '../utils/index';
+} from '../../utils/index';
 import {
   selectTemplate,
   inputName,
   inputAuthor,
   inputVersion,
   inputDescription,
-} from '../utils/checkInfo';
+} from '../../utils/checkInfo';
 
-const init = async (git: boolean) => {
+const createProject = async (git: boolean) => {
   const template: string = await selectTemplate();
   log.verbose('template', template);
 
@@ -50,4 +50,4 @@ const init = async (git: boolean) => {
   }
 };
 
-export default init;
+export default createProject;

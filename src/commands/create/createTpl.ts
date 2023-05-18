@@ -1,18 +1,22 @@
 import inquirer from 'inquirer';
 import path from 'path';
 import fs from 'fs-extra';
-import config from '../config';
+import config from '../../config';
+import {
+  log,
+} from '../../utils/index';
 import {
   page,
   component,
   i18n,
   question,
-} from '../template/index';
+} from '../../template/index';
 
-const create = () => {
+const createTpl = () => {
 
   inquirer.prompt(question).then(async (answers) => {
     let { template } = answers;
+    log.verbose('template', template)
     const { name } = answers;
     // 首字母大写
     name.replace(name[0], name[0].toUpperCase());
@@ -33,6 +37,7 @@ const create = () => {
     // 生成文件
     const buildCpsFiles = (type: string) => {
       let fullPath = path.join(path.resolve(process.cwd(), (config as any).template[template]));
+      log.verbose('fullPath', fullPath)
       fullPath = type === 'i18n' ? fullPath : `${fullPath}/${name}`;
       const fileList = getTemplate(type);
 
@@ -53,4 +58,4 @@ const create = () => {
   });
 };
 
-export default create;
+export default createTpl;
