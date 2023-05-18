@@ -3,14 +3,13 @@ import execa from 'execa';
 import fs from 'fs-extra';
 import { homedir } from 'os';
 import path from 'path';
-// import pkg from '../../package.json';
 import { log, PREFIX } from './log';
+
 /**
  *
  * @param cachePath 缓存目录
  * @param packageName 包名
  */
-
 const pkg = require('../../package.json');
 
 const defaultCachePath = path.resolve(
@@ -19,9 +18,9 @@ const defaultCachePath = path.resolve(
   'node_modules',
 );
 async function execInstall(cachePath: string, packageName: string, version: string) {
-  const installCommand = 'npm';
-  const installArgs = ['install', `${packageName}@${version}`];
-  const cwd = cachePath;
+  const installCommand: string = 'npm';
+  const installArgs: string[] = ['install', `${packageName}@${version}`];
+  const cwd: string = cachePath;
   await execa(installCommand, installArgs, { cwd });
 }
 

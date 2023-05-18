@@ -38,7 +38,7 @@ program
     cz();
   });
 
-// ---------- cz ----------
+// ---------- publish ----------
 program
   .command('publish')
   .description('npm publish')
@@ -49,7 +49,8 @@ program
   .action(() => {
     log.info('', '命令执行之后');
   });
-// 这里设置的是全局配置
+
+// ---------- 这里设置的是全局配置 ----------
 program
   .name(Object.keys(pkg.bin)[0])
   .usage('<command> [options]')
