@@ -3,7 +3,7 @@ import { Command } from 'commander';
 import create from '../commands/create/index';
 import cz from '../commands/cz';
 import publish from '../commands/publish';
-// import init from '../commands/init';
+import { generateService } from '../commands/openapi/index';
 import { checkLogin, checkVersion, log, PREFIX } from '../utils/index';
 
 const program = new Command();
@@ -46,6 +46,15 @@ program
   .action(async () => {
     await publish();
   });
+
+// ---------- openApi ----------
+program
+  .command('openapi')
+  .description('openapi 自动生成 service')
+  .action(() => {
+    generateService();
+  });
+
 
 // ---------- 这里设置的是全局配置 ----------
 program
