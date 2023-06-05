@@ -7,6 +7,16 @@ import getVersion from './getVersion';
 import gitInitialize from './initGit';
 import { installPackage } from './installPackage';
 import { log, PREFIX } from './log';
+import {
+  getAbsolutePath,
+  mkdir,
+  prettierFile,
+  writeFile,
+  getTagName,
+  formatApiInfo,
+  formatParamsForYFH,
+  stripDot,
+} from './openApi';
 
 export {
   log,
@@ -19,4 +29,14 @@ export {
   checkVersion,
   getVersion,
   getNewVersion,
+
+  // --- openApi ---
+  getAbsolutePath,
+  mkdir,
+  prettierFile,
+  writeFile,
+  getTagName,
+  formatApiInfo,
+  formatParamsForYFH,
+  stripDot,
 };
