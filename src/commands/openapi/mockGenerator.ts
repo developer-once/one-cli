@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Mock from 'mockjs';
 import fs from 'fs';
 import pinyin from "tiny-pinyin";

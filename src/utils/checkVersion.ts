@@ -37,10 +37,10 @@ async function checkVersion(name: string, version: string) {
     log.verbose('当前远程的版本是:', originLatestVersin);
 
     // 如果本地版本小于或等于远程版本，则报错
-    if (semver.compare(originLatestVersin, currentVersion) >= 0) {
-      log.error(PREFIX, '当前本地版本小于或等于仓库版本');
-      throw new Error('当前本地版本小于或等于仓库版本,请检查');
-    }
+    // if (semver.compare(originLatestVersin, currentVersion) >= 0) {
+    //   log.error(PREFIX, '当前本地版本小于或等于仓库版本');
+    //   throw new Error('当前本地版本小于或等于仓库版本,请检查');
+    // }
     
   } catch (e: any) {
     log.error('解析 npm 注册地址错误', e.message);

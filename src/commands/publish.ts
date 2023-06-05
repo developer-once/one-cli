@@ -23,15 +23,17 @@ async function commitMessage() {
         message: `是输入此次git commit 的消息(遵循 angular 规范)`,
         validate: async (input) => {
           const cwd = path.resolve( __dirname, '..','..');
-          const opts = await load(CONFIG, { cwd: cwd });
+          const opts: any = await load(CONFIG, { cwd: cwd });
           log.verbose('在这个路径寻找lint文件', cwd);
+
           const { valid, errors } = await lint(input, opts.rules, {
             defaultIgnores: opts.defaultIgnores,
             ignores: opts.ignores,
             plugins: opts.plugins,
             helpUrl: opts.helpUrl,
-            parserOpts: opts.parserPreset?.parserOpts!,
+            parserOpts: opts?.parserPreset?.parserOpts || false,
           });
+
           if (errors.length) {
             log.verbose(PREFIX, JSON.stringify(errors));
             log.error(PREFIX, `参考格式: <type>(<scope>): <subject> 的commit `);

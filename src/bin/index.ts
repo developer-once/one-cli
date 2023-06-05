@@ -3,7 +3,7 @@ import { Command } from 'commander';
 import create from '../commands/create/index';
 import cz from '../commands/cz';
 import publish from '../commands/publish';
-import { generateService } from '../commands/openapi/index';
+import openAPI from '../commands/openapi/index';
 import { checkLogin, checkVersion, log, PREFIX } from '../utils/index';
 
 const program = new Command();
@@ -52,7 +52,7 @@ program
   .command('openapi')
   .description('openapi 自动生成 service')
   .action(() => {
-    generateService();
+    openAPI();
   });
 
 

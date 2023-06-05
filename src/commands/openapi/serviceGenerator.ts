@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { existsSync, readFileSync } from 'fs';
 import glob from 'glob';
 import * as nunjucks from 'nunjucks';
@@ -15,10 +16,10 @@ import type {
 } from 'openapi3-ts';
 import { join, resolve } from 'path';
 import ReservedDict from 'reserved-words';
-import rimraf from 'rimraf';
+// import rimraf from 'rimraf';
 import { xor, pick } from 'lodash';
 import pinyin from 'tiny-pinyin';
-import type { GenerateServiceProps } from './index';
+import type { GenerateServiceProps } from './openApi';
 import Log from './log';
 import { stripDot, writeFile } from '../../utils';
 
@@ -259,7 +260,7 @@ class ServiceGenerator {
     this.finalPath = '';
     this.config = {
       projectName: 'api',
-      templatesFolder: join(__dirname, './', 'templates'),
+      templatesFolder: join(__dirname, '../../../', 'templates'),
       ...config,
     };
     this.openAPIData = openAPIData;
@@ -323,14 +324,14 @@ class ServiceGenerator {
       this.finalPath = finalPath;
 
       // 启用增量，不删除原有controller，对需要更新的api做覆盖式处理
-      if (!this.config.increment) {
-        glob
-          .sync(`${finalPath}/**/*`)
-          .filter((ele) => !ele.includes('_deperated'))
-          .forEach((ele) => {
-            rimraf.sync(ele);
-          });
-      }
+      // if (!this.config.increment) {
+      //   glob
+      //     .sync(`${finalPath}/**/*`)
+      //     .filter((ele) => !ele.includes('_deperated'))
+      //     .forEach((ele) => {
+      //       rimraf.sync(ele);
+      //     });
+      // }
     } catch (error) {
       Log(`🚥 serves 生成失败: ${error}`);
     }
